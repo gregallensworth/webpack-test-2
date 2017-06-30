@@ -7,8 +7,8 @@
 require("./page3.less");
 
 // sitewide
-require("./sitewide.less");
-require("./sitewide.js6");
+require("./../sitewide.less");
+require("./../sitewide.js6");
 
 
 //

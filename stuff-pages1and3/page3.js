@@ -126,7 +126,7 @@ __webpack_require__(0);
 //
 
 angular.module("mainApp", []).controller("mainCtrl", ['$scope', function ($scope) {
-    $scope.textwords = "Type Things Here On Page Two";
+    $scope.textwords = "Type Things Here On Page Three";
 }]);
 
 /***/ })

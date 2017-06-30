@@ -6,10 +6,10 @@ module.exports = {
      * this would include not only the JS code but also any LESS, CSS, JS, JS2015 files which are require()'d thereby
      */
     entry: {
-        page1: './page1.js6',
-        page2: './page2.js6',
-        page3: './page3.js6',
-        page4: './page4.js6'
+        './stuff-pages1and3/page1': './stuff-pages1and3/page1.js6',
+        './stuff-pages2and4/page2': './stuff-pages2and4/page2.js6',
+        './stuff-pages1and3/page3': './stuff-pages1and3/page3.js6',
+        './stuff-pages2and4/page4': './stuff-pages2and4/page4.js6'
     },
     output: {
         path: __dirname,

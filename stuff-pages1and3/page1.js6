@@ -7,13 +7,13 @@
 require("./page1.less");
 
 // sitewide
-require("./sitewide.less");
-require("./sitewide.js6");
+require("./../sitewide.less");
+require("./../sitewide.js6");
 
 // third-party JS + CSS code, e.g. some jQuery slideshow not in the CDNs
 // or which we had to modify away from the stock version
-require("./leaflet-external/leaflet-src.js");
-require("./leaflet-external/leaflet.css");
+require("./../leaflet-external/leaflet-src.js");
+require("./../leaflet-external/leaflet.css");
 
 //
 // okay, now on to the JavaScript code implied by the file suffix  ;)

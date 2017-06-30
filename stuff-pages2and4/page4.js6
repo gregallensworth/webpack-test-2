@@ -4,11 +4,11 @@
 //
 
 // CSS files
-require("./page2.less");
+require("./page4.less");
 
 // sitewide
-require("./sitewide.less");
-require("./sitewide.js6");
+require("./../sitewide.less");
+require("./../sitewide.js6");
 
 
 //
@@ -20,6 +20,6 @@ angular.module("mainApp", [])
 .controller("mainCtrl", [
     '$scope',
     function($scope) {
-        $scope.textwords = "Type Things Here On Page Two";
+        $scope.textwords = "Type Things Here On Page Four";
     }
 ]);
