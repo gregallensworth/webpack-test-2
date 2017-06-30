@@ -13722,6 +13722,12 @@ __webpack_require__(3);
 // tip: to not get corrupted on minification, double-specify the deps to be injected
 //
 
+// a quick JQuery hack
+$(document).ready(function () {
+    if (L) $('#leafletok').text('Leaflet loaded OK');
+});
+
+// okay, real code
 angular.module("mainApp", []).controller("mainCtrl", ['$scope', function ($scope) {
     $scope.textwords = "Type Things Here On Page One";
 }]);

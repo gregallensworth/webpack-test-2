@@ -20,6 +20,12 @@ require("./leaflet-external/leaflet.css");
 // tip: to not get corrupted on minification, double-specify the deps to be injected
 //
 
+// a quick JQuery hack
+$(document).ready(() => {
+    if (L) $('#leafletok').text('Leaflet loaded OK');
+});
+
+// okay, real code
 angular.module("mainApp", [])
 .controller("mainCtrl", [
     '$scope',
