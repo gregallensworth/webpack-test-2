@@ -1,0 +1,25 @@
+//
+// this JS file is also a webpack entry point
+// so includes the page-specific executable code, but also other stuff to bundle: LESS to CSS, third-party CSS, sitewide JS + CSS, ...
+//
+
+// CSS files
+require("./page4.less");
+
+// sitewide
+require("./sitewide.less");
+require("./sitewide.js6");
+
+
+//
+// okay, now on to the JavaScript code implied by the file suffix  ;)
+// tip: to not get corrupted on minification, double-specify the deps to be injected
+//
+
+angular.module("mainApp", [])
+.controller("mainCtrl", [
+    '$scope',
+    function($scope) {
+        $scope.textwords = "Type Things Here On Page Four";
+    }
+]);

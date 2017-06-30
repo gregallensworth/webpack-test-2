@@ -1,0 +1,14 @@
+body div.container {
+  background-color: darkgreen;
+  color: white;
+}
+input[type="text"] {
+  background-color: green;
+  color: black;
+}
+/*** SITEWIDE CSS alternative font ***/
+body {
+  font-family: Titillium;
+  font-style: italic;
+  font-size: 16px;
+}

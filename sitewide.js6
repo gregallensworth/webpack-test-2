@@ -1,0 +1,9 @@
+// sitewide.js on every page
+// individual pages have their own idioms based on need: jQuery forms, Angular applications, etc.
+
+// proof of any JS code running: some simple jquery to change the page title
+$(document).ready( () => {
+    var $h1 = $('h1');
+    var newtitle = 'Loaded JS for ' + $h1.text();
+    $h1.text(newtitle);
+});
