@@ -31,5 +31,12 @@ angular.module("mainApp", [])
     '$scope',
     function($scope) {
         $scope.textwords = "Type Things Here On Page One";
+
+
+
+setInterval(() => {
+    console.log('five seconds have passed');
+}, 5000);
+
     }
 ]);

@@ -91,7 +91,7 @@ module.exports = {
     /*
      * enable source maps, applicable to both JS and CSS
      */
-    devtool: "cheap-module-source-map",
+    devtool: "nosources-source-map",
 
     /*
      * plugins for the above
