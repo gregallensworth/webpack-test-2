@@ -1,16 +1,27 @@
+// the list of .js6 files for the pages
+// there must be a .js6 and .less file, which will be turned into .js and .css outputs
+// these .js6 files are both executable JS code for the page, as well as require() statements to load additional stuff foor the page
+//
+// but don't stop using CDNs and SCRIPT tags! they give great performance, 
+
+const JS6_FILES = [
+    './stuff-pages1and3/page1.js6',
+    './stuff-pages2and4/page2.js6',
+    './stuff-pages1and3/page3.js6',
+    './stuff-pages2and4/page4.js6'
+];
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 module.exports = {
     /*
-     * separate entry points: each js6 is bundled+compiled into samename.js
-     * this would include not only the JS code but also any LESS, CSS, JS, JS2015 files which are require()'d thereby
+     * multiple entry points, one per entry
+     * the [name] for each is the basename, e.g. some/path/to/thing so we can add .js and .css suffixes
+     * the values are the files with their .js6 suffixes retained
      */
-    entry: {
-        './stuff-pages1and3/page1': './stuff-pages1and3/page1.js6',
-        './stuff-pages2and4/page2': './stuff-pages2and4/page2.js6',
-        './stuff-pages1and3/page3': './stuff-pages1and3/page3.js6',
-        './stuff-pages2and4/page4': './stuff-pages2and4/page4.js6'
-    },
+    entry: JS6_FILES.reduce((o, key) => { o[key.replace(/\.js6$/, '')] = key; return o; }, {}),
     output: {
         path: __dirname,
         filename: '[name].js'
