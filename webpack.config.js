@@ -54,14 +54,19 @@ module.exports = {
             {
                 test: /\.css$/,
                 use: ExtractTextPlugin.extract({
-                    use: [ { loader: 'css-loader' } ],
+                    use: [
+                        { loader: 'css-loader', options: { minimize: true, sourceMap:true, url: false } }
+                    ],
                     fallback: 'style-loader'
                 })
             },
             {
                 test: /\.less$/,
                 use: ExtractTextPlugin.extract({
-                    use: [ { loader: 'css-loader' }, { loader: 'less-loader' } ],
+                    use: [
+                        { loader: 'css-loader', options: { minimize: true, sourceMap:true, url: false } },
+                        { loader: 'less-loader', options: { sourceMap:true } },
+                    ],
                     fallback: 'style-loader'
                 })
             },
@@ -81,6 +86,12 @@ module.exports = {
             }
         ]
     },
+
+
+    /*
+     * enable source maps, applicable to both JS and CSS
+     */
+    devtool: "cheap-module-source-map",
 
     /*
      * plugins for the above

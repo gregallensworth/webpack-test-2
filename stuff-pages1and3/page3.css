@@ -1,12 +1,2 @@
-/*** SITEWIDE CSS alternative font ***/
-body {
-  font-family: Titillium;
-  font-style: italic;
-  font-size: 16px;
-}
-body div.container {
-  background-color: silver;
-}
-input[type="text"] {
-  background-color: #fafafa;
-}
+body{font-family:Titillium;font-style:italic;font-size:16px}body div.container{background-color:silver}input[type=text]{background-color:#fafafa}
+/*# sourceMappingURL=page3.css.map*/
