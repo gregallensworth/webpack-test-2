@@ -19,7 +19,14 @@ module.exports = {
     module: {
         loaders: [
             /*
-             * Babel + ES2015 via loader; lint and transpile
+             * Plain JS files
+             * just kidding; Webpack already does those without any configuration  :)
+             * but we do not want to lump them in with ES6 files: they would be third-party and then run through JSHint and we can't waste time linting third-party JS
+             */
+
+            /*
+             * run .js6 files through Babel + ES2015 via loader; lint and transpile into X.js
+             * that's our suffix for ECMAScript 2015 / ES6 files
              */
             {
                 test: /\.js6$/,
@@ -31,12 +38,7 @@ module.exports = {
             },
 
             /*
-             * Plain JS files
-             */
-
-            /*
-             * CSS files and also LESS-to-CSS all go into bundle.css
-             * this being an afterthought/plugin we do need to specify the filenames
+             * CSS files and also LESS-to-CSS all go into one bundled X.css
              */
             {
                 test: /\.css$/,
@@ -52,6 +54,20 @@ module.exports = {
                     fallback: 'style-loader'
                 })
             },
+
+            /*
+             * Files to ignore
+             * Notably from CSS, e.g. background-image SVG, PNGs, JPEGs, fonts, ...
+             * we do not need them processed; our stylesheets etc. will point to them in their proper place
+             */
+            {
+                test: /\.(svg|gif|jpg|jpeg|png)$/,
+                loader: 'ignore-loader'
+            },
+            {
+                test: /\.(woff|woff2|ttf|eot)$/,
+                loader: 'ignore-loader'
+            }
         ]
     },
 
