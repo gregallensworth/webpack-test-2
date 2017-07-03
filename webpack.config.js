@@ -72,6 +72,15 @@ module.exports = {
             },
 
             /*
+             * HTML Files
+             * find the pageX.css and pageX.js hooks and add a cache-busting [hash] into them
+             */
+            {
+                test: /\.(html)$/,
+                loader: 'ignore-loader'
+            },
+
+            /*
              * Files to ignore
              * Notably from CSS, e.g. background-image SVG, PNGs, JPEGs, fonts, ...
              * we do not need them processed; our stylesheets etc. will point to them in their proper place

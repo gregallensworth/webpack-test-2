@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "./node_modules/.bin/webpack --config webpack.config.js --hide-modules=true --display-origins=false --display-provided-exports=false --optimize-minimize=true"
+    "build": "./node_modules/.bin/webpack --config webpack.config.js --hide-modules=true --display-origins=false --display-provided-exports=false --optimize-minimize=true --colors --progress",
+    "watch": "./node_modules/.bin/webpack --config webpack.config.js --hide-modules=true --display-origins=false --display-provided-exports=false --optimize-minimize=true --colors --progress --watch"
   },
   "author": "",
   "license": "ISC",
