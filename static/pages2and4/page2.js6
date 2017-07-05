@@ -3,8 +3,11 @@
 // so includes the page-specific executable code, but also other stuff to bundle: LESS to CSS, third-party CSS, sitewide JS + CSS, ...
 //
 
+// the HTML file itself for a simple [hash] replacement for cache-busting
+require("./../../templates/pages2and4/page2.html");
+
 // CSS files
-require("./page3.less");
+require("./page2.less");
 
 // sitewide
 require("./../sitewide.less");
@@ -20,6 +23,6 @@ angular.module("mainApp", [])
 .controller("mainCtrl", [
     '$scope',
     function($scope) {
-        $scope.textwords = "Type Things Here On Page Three";
+        $scope.textwords = "Type Things Here On Page Two";
     }
 ]);

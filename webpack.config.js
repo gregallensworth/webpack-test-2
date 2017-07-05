@@ -2,18 +2,22 @@
 // there must be a .js6 and .less file, which will be turned into .js and .css outputs
 // these .js6 files are both executable JS code for the page, as well as require() statements to load additional stuff foor the page
 //
-// but don't stop using CDNs and SCRIPT tags! they give great performance, 
+// but don't stop using CDNs and SCRIPT tags! they give great performance, compared to bundling everything
 
 const JS6_FILES = [
-    './stuff-pages1and3/page1.js6',
-    './stuff-pages2and4/page2.js6',
-    './stuff-pages1and3/page3.js6',
-    './stuff-pages2and4/page4.js6'
+    './static/pages1and3/page1.js6',
+    './static/pages2and4/page2.js6',
+    './static/pages1and3/page3.js6',
+    './static/pages2and4/page4.js6'
 ];
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
+
+var StringReplacePlugin = require("string-replace-webpack-plugin");
+
+const randomhash = Math.round(Math.random() * 1000000000); // for cace-busting "hash" replacement
 
 module.exports = {
     /*
@@ -55,7 +59,7 @@ module.exports = {
                 test: /\.css$/,
                 use: ExtractTextPlugin.extract({
                     use: [
-                        { loader: 'css-loader', options: { minimize: true, sourceMap:true, url: false } }
+                        { loader: 'css-loader', options: { minimize: true, sourceMap: true, url: false } }
                     ],
                     fallback: 'style-loader'
                 })
@@ -64,7 +68,7 @@ module.exports = {
                 test: /\.less$/,
                 use: ExtractTextPlugin.extract({
                     use: [
-                        { loader: 'css-loader', options: { minimize: true, sourceMap:true, url: false } },
+                        { loader: 'css-loader', options: { minimize: true, sourceMap: true, url: false } },
                         { loader: 'less-loader', options: { sourceMap:true } },
                     ],
                     fallback: 'style-loader'
@@ -73,11 +77,42 @@ module.exports = {
 
             /*
              * HTML Files
-             * find the pageX.css and pageX.js hooks and add a cache-busting [hash] into them
+             * replace .js and .css filenames to include a random hash for cache-busting
+             * HTML syntax counts!
+             * - the src/href must be last attribute
+             * - tags must close properly
+             * - there must be a ?XXXX to be replaced and XXXX must be numbers
+             * - the HTML files MUST have these tags or build will fail (to make sure you don't forget)
+             * Example: <script src="some/path/page3.js?00000"></script>
+             * Example: <link href="some/path/page3.css?00000" />
              */
             {
-                test: /\.(html)$/,
-                loader: 'ignore-loader'
+                test: /.html$/,
+                use: [
+                    {
+                        loader: 'file-loader',
+                        options: {
+                            name: '[path][name].html',
+                        },
+                    },
+                    {
+                        loader: StringReplacePlugin.replace({
+                        replacements: [
+                            {
+                                pattern: /\.js\?\d+">\s*<\/script>/g,
+                                replacement: function (match, p1, offset, string) {
+                                    return '.js?' + randomhash + '"></script>';
+                                }
+                            },
+                            {
+                                pattern: /\.css\?\d+"\s*\/>/g,
+                                replacement: function (match, p1, offset, string) {
+                                    return '.css?' + randomhash + '" />';
+                                }
+                            },
+                        ]})
+                    }
+                ]
             },
 
             /*
@@ -111,5 +146,7 @@ module.exports = {
             disable: false,
             filename: '[name].css'
         }),
+        // for doing string replacements on files
+        new StringReplacePlugin()
     ]
 };
