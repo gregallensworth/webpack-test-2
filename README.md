@@ -1,12 +1,15 @@
 # webpack-test-2
+
 A test of some more webpack concepts
 
 In this case specifically, usage with multi-page apps such as with Django.
 
 Django keeps HTML templates in a separate place than the static JS/CSS outputs. We would typically have the templates and the JS/CSS files in subfolders for organization, e.g. admin-side, website-side, and perhaps others.
 
+*Actual documentation is inside the webpack.config.js file itself.*
+
 Each page would typically have:
-* `appname/templates/subdir/pageX.html`
+* `appname/templates/subdir/pageX.html` -- compiled from `pageX.src.html`
 * `appname/static/subdir/pageX.js` -- compiled from `pageX.js6`
 * `appname/static/subdir/pageX.css` -- compiled from `pageX.less`
 
