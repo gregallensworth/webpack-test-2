@@ -1,7 +1,22 @@
 /*
- * Webpack configuration for use with Django applications
- * version 1, July 2017
+ * Webpack configuration and build scripts for use with Django applications
+ * Version 1, July 2017
  * Greg "Gregor" Allensworth, GreenInfo Network   gregor@greeninfo.org
+ *
+ * Basic usage:
+ * - yarn install -- Initial setup of dependencies for build/watch tasks
+ * - npm run build -- Analyze files, generate output files.
+ * - npm run watch -- Watches for file changes, recompiles as needed.
+ *
+ * Design goals:
+ *
+ * - Retain directory structure for ease of management
+ * - Target output is ready-to-run HTMl/JS/CSS files, no build service after deployment
+ *   since target environment may or may not have this ability.
+ * - Continued use of SCRIPT tags and CDNs for loading third-party libraries
+ *   for superior delivery speed compared to bundling.
+ * - Compile ES2015 and LESS for developers, into vanilla JS and CSS files for browsers
+ * - Interpolation of cache-busting hash into HTML script/css tags
  *
  * Presumed structure:
  *
@@ -25,6 +40,9 @@
  *   and will bundle them into the page's .css and .js outputs
  *   However, SCRIPT tags calling CDNs tend to give faster loading times than bundling and should usually
  *   be preferred for loading of third-party materials, unless there's a compelling reason to bundle.
+ *
+ * - The output .js .less .html files should be included in version control as browser deliverables,
+ *   OR ELSE the deployment environment should include a mechanism to run the build. Up to you.
  *
  */
 
