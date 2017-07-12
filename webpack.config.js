@@ -1,8 +1,37 @@
-// the list of .js6 files for the pages
-// there must be a .js6 and .less file, which will be turned into .js and .css outputs
-// these .js6 files are both executable JS code for the page, as well as require() statements to load additional stuff foor the page
-//
-// but don't stop using CDNs and SCRIPT tags! they give great performance, compared to bundling everything
+/*
+ * Webpack configuration for use with Django applications
+ * version 1, July 2017
+ * Greg "Gregor" Allensworth, GreenInfo Network   gregor@greeninfo.org
+ *
+ * Presumed structure:
+ *
+ * - Typical Django multi-page app structure, in which view methods render() a HTML template
+ *
+ * - The .js6 files will require() the .less and .src.html files relevant to that page
+ *
+ * - The .js6 and .less files exist in a subdirectory structure such as static/
+ *   and will be compiled to .js and .css files in the same folder as those source files
+ *   these form client-delivered JS and CSS for each page
+ *
+ * - The .src.html files exist in a subdirectory structure such as templates/
+ *   and will be compiled to .html files in the same folder as those source files
+ *   these .html outputs are the templates to be used by Django
+ *   though the .src.html sources would also work with Django and may be more expedient during development
+ *
+ * - For organization, it is recommended that these files follow naming conventions
+ *   fitting their target page, e.g. about.js6   about.less   about.src.html
+ *
+ * - The .js6 files may require() additional .css and .js files from third-party libraries
+ *   and will bundle them into the page's .css and .js outputs
+ *   However, SCRIPT tags calling CDNs tend to give faster loading times than bundling and should usually
+ *   be preferred for loading of third-party materials, unless there's a compelling reason to bundle.
+ *
+ */
+
+// the list of .js6 entry point files
+// in addition to being ES2015 JavaScript code, these may require() the .src.html and .less files to also be compiled into their own outputs
+// tip: require()ing other stuff, or even having JavaScript code in the file, is typical but optional
+// you could have a .js6 file which effectively only serves to create a bundle of third-party code or a shared stylesheet
 
 const JS6_FILES = [
     './static/pages1and3/page1.js6',
@@ -17,7 +46,7 @@ const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 var StringReplacePlugin = require("string-replace-webpack-plugin");
 
-const randomhash = Math.round(Math.random() * 1000000000); // for cace-busting "hash" replacement
+const randomhash = Math.round(Math.random() * 1000000000); // for cache-busting [hash] replacement in .src.html files
 
 module.exports = {
     /*
