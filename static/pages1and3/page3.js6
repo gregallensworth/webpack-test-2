@@ -4,7 +4,7 @@
 //
 
 // the HTML file itself for a simple [hash] replacement for cache-busting
-require("./../../templates/pages1and3/page3.html");
+require("./../../templates/pages1and3/page3.src.html");
 
 // CSS files
 require("./page3.less");

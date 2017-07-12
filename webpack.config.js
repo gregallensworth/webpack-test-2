@@ -77,37 +77,29 @@ module.exports = {
 
             /*
              * HTML Files
-             * replace .js and .css filenames to include a random hash for cache-busting
-             * HTML syntax counts!
-             * - the src/href must be last attribute
-             * - tags must close properly
-             * - there must be a ?XXXX to be replaced and XXXX must be numbers
-             * - the HTML files MUST have these tags or build will fail (to make sure you don't forget)
-             * Example: <script src="some/path/page3.js?00000"></script>
-             * Example: <link href="some/path/page3.css?00000" />
+             * replace [hash] entities in the .src.html to generate .html
+             * typically used on .js and .css filenames to include a random hash for cache-busting
+             * though could be used to cache-bust nearly anything such as images
+             * tip: HTML file basenames (like any) should be fairly minimal: letters and numbers, - _ . characters
              */
             {
-                test: /.html$/,
+                test: /\.src\.html$/,
                 use: [
                     {
                         loader: 'file-loader',
                         options: {
-                            name: '[path][name].html',
+                            // replace .src.html with just .html
+                            name: '[path][1].html',
+                            regExp: '([\\w\\-\.]+)\\.src\\.html$',
                         },
                     },
                     {
                         loader: StringReplacePlugin.replace({
                         replacements: [
                             {
-                                pattern: /\.js\?\d+">\s*<\/script>/g,
+                                pattern: /\[hash\]/g,
                                 replacement: function (match, p1, offset, string) {
-                                    return '.js?' + randomhash + '"></script>';
-                                }
-                            },
-                            {
-                                pattern: /\.css\?\d+"\s*\/>/g,
-                                replacement: function (match, p1, offset, string) {
-                                    return '.css?' + randomhash + '" />';
+                                    return randomhash;
                                 }
                             },
                         ]})
@@ -119,6 +111,7 @@ module.exports = {
              * Files to ignore
              * Notably from CSS, e.g. background-image SVG, PNGs, JPEGs, fonts, ...
              * we do not need them processed; our stylesheets etc. will point to them in their proper place
+             * webpack scans the HTML files and will throw a fit if we don't account for every single file it finds
              */
             {
                 test: /\.(svg|gif|jpg|jpeg|png)$/,
@@ -147,6 +140,6 @@ module.exports = {
             filename: '[name].css'
         }),
         // for doing string replacements on files
-        new StringReplacePlugin()
+        new StringReplacePlugin(),
     ]
 };
