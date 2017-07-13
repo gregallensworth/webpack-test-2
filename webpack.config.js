@@ -64,7 +64,7 @@ const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 var StringReplacePlugin = require("string-replace-webpack-plugin");
 
-const randomhash = Math.round(Math.random() * 1000000000); // for cache-busting [hash] replacement in .src.html files
+const randomhash = new Date().toString(); // for cache-busting [hash] replacement in .src.html files
 
 module.exports = {
     /*
