@@ -7,10 +7,10 @@
 require("./../../templates/pages1and3/page1.src.html");
 
 // CSS files
-require("./page1.less");
+require("./page1.scss");
 
 // sitewide
-require("./../sitewide.less");
+require("./../sitewide.scss");
 require("./../sitewide.js6");
 
 

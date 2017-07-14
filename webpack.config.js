@@ -100,7 +100,7 @@ module.exports = {
             },
 
             /*
-             * CSS files and also LESS-to-CSS all go into one bundled X.css
+             * CSS files and also SASS-to-CSS all go into one bundled X.css
              */
             {
                 test: /\.css$/,
@@ -112,11 +112,11 @@ module.exports = {
                 })
             },
             {
-                test: /\.less$/,
+                test: /\.scss$/,
                 use: ExtractTextPlugin.extract({
                     use: [
                         { loader: 'css-loader', options: { minimize: true, sourceMap: true, url: false } },
-                        { loader: 'less-loader', options: { sourceMap:true } },
+                        { loader: 'sass-loader', options: { sourceMap:true } },
                     ],
                     fallback: 'style-loader'
                 })
