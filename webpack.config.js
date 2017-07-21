@@ -64,8 +64,6 @@ const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 var StringReplacePlugin = require("string-replace-webpack-plugin");
 
-const randomhash = new Date().toString(); // for cache-busting [hash] replacement in .src.html files
-
 module.exports = {
     /*
      * multiple entry points, one per entry
@@ -91,7 +89,7 @@ module.exports = {
              * that's our suffix for ECMAScript 2015 / ES6 files
              */
             {
-                test: /\.js6$/,
+                test: /\.(js|js6)$/,
                 use: [
                     { loader: 'babel-loader', options: { presets: ['es2015'] } },
                     { loader: 'jshint-loader', options: { esversion: 6, emitErrors: true, failOnHint: true } }
@@ -146,6 +144,7 @@ module.exports = {
                             {
                                 pattern: /\[hash\]/g,
                                 replacement: function (match, p1, offset, string) {
+                                    const randomhash = new Date().toString();
                                     return randomhash;
                                 }
                             },
